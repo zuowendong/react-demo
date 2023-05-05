@@ -1,4 +1,38 @@
+// 函数组件
+const App = () => {
+	const [todoItems, setTodoItems] = React.useState([]);
+	const [filteredTodoItems, setFilteredTodoItems] = React.useState([]);
+
+	React.useEffect(() => {
+		fetch("https://pokeapi.co/api/v2/pokemon")
+			.then((res) => res.json())
+			.then((json) => {
+				json.results.map((result, index) => {
+					result.id = index + 1;
+				});
+				setTodoItems(json.results);
+				setFilteredTodoItems(json.results);
+			});
+	}, []);
+
+	const onChangeHandler = (event) => {
+		const comparedTodoItems = todoItems.filter((todo) => {
+			return todo.name.includes(event.target.value);
+		});
+		setFilteredTodoItems(comparedTodoItems);
+	};
+
+	return (
+		<>
+			<h1>Todo List</h1>
+			<InputSearch onChangeHandler={onChangeHandler} />
+			<Lists todoList={filteredTodoItems} />
+		</>
+	);
+};
+
 // 类组件
+/*
 class App extends React.Component {
 	constructor() {
 		super();
@@ -56,3 +90,5 @@ class App extends React.Component {
 		);
 	}
 }
+
+*/
