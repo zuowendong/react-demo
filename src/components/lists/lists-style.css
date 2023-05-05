@@ -1,0 +1,13 @@
+.ul-content {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	text-align: center;
+	background-color: lightcyan;
+	list-style: none;
+}
+
+.li-item {
+	font-size: 16px;
+	color: darkorange;
+	margin-bottom: 10px;
+}
